@@ -1,17 +1,18 @@
-<?php $__env->startSection('content'); ?>
+@extends('layouts.app')
+
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="">
-            <?php if(Session::has('message')): ?>
+            @if(Session::has('message'))
                 <div class="alert alert-success">
-                    <?php echo e(Session::get('message')); ?>
-
+                    {{Session::get('message')}}
                 </div>
-            <?php endif; ?>
+            @endif
             <div class="card">
                 <div class="card-header">All Food
                     <span class="float-right">
-                        <a href="<?php echo e(route('food.create')); ?>">
+                        <a href="{{route('food.create')}}">
                             <button class="btn 
                             btn-outline-secondary">
                             Add food
@@ -35,18 +36,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if(count($foods)>0): ?>
-                            <?php $__currentLoopData = $foods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$food): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            @if(count($foods)>0)
+                            @foreach($foods as $key=>$food)
                             <tr>
-                                <td><img src="<?php echo e(asset('images')); ?>/<?php echo e($food->image); ?>"
+                                <td><img src="{{asset('images')}}/{{$food->image}}"
                                 width="100"></td>
-                                <td><?php echo e($food->name); ?></td>
-                                <td><?php echo e($food->description); ?></td>
-                                <td><?php echo e($food->price); ?></td>
-                                <td><?php echo e($food->category->name); ?></td>
+                                <td>{{$food->name}}</td>
+                                <td>{{$food->description}}</td>
+                                <td>{{$food->price}}</td>
+                                <td>{{$food->category->name}}</td>
                                 <td>
-                                    <a href="<?php echo e(route('food.edit'
-                                    ,[$food->id])); ?>">
+                                    <a href="{{route('food.edit'
+                                    ,[$food->id])}}">
                                         <button class="btn btn-outline-success">
                                         Edit</button>
                                     </a></td>
@@ -58,7 +59,7 @@
                                     type="button" 
                                     class="btn btn-primary" 
                                     data-toggle="modal"
-                                     data-target="#exampleModal<?php echo e($food->id); ?>">
+                                     data-target="#exampleModal{{$food->id}}">
                                     Delete
                                     </button>
 
@@ -67,13 +68,12 @@
                                     
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal<?php echo e($food->id); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModal{{$food->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                        <form action="<?php echo e(route('food.destroy',[$food->id])); ?>" method="post">
-                                            <?php echo csrf_field(); ?>
-                                            <?php echo e(method_field('DELETE')); ?>
-
+                                        <form action="{{route('food.destroy',[$food->id])}}" method="post">
+                                            @csrf
+                                            {{method_field('DELETE')}}
                                         
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Delete confirmation</h5>
@@ -95,11 +95,11 @@
                                 
                                 </td>
                             </tr>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            @endforeach
 
-                            <?php else: ?>
+                            @else
                             <td>No food to display</td>
-                            <?php endif; ?>
+                            @endif
                             
                         </tbody>
                     </table>
@@ -108,6 +108,4 @@
         </div>
     </div>
 </div>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /opt/lampp/htdocs/restaurant-laravel-php-app/resources/views/food/index.blade.php ENDPATH**/ ?>
+@endsection

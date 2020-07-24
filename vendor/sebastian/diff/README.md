@@ -1,5 +1,6 @@
 # sebastian/diff
 
+
 Diff implementation for PHP, factored out of PHPUnit into a stand-alone component.
 
 ## Installation

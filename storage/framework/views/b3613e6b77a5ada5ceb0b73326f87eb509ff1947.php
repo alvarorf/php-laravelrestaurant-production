@@ -1,0 +1,1 @@
+index<?php /**PATH /opt/lampp/htdocs/restaurant-laravel-php-app/resources/views/index.blade.php ENDPATH**/ ?>

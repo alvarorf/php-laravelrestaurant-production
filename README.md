@@ -1,3 +1,3 @@
 ## Php Laravel Restaurant
 
-Please see the live version here: [www.php-laravelrestaurant.tk](www.php-laravelrestaurant.tk).
+Please see the live version here: [https://www.php-laravelrestaurant.tk](https://www.php-laravelrestaurant.tk).
